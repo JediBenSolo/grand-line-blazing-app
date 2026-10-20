@@ -1,0 +1,16 @@
+{
+  "appId": "com.antman.grandlineblazing",
+  "appName": "Grand Line Blazing",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#120804",
+    "scrollEnabled": false
+  },
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": false,
+      "resetWhenUpdate": false
+    }
+  }
+}
