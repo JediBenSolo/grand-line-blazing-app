@@ -18,7 +18,12 @@ jobs:
       - name: Install Capacitor
         run: npm install
       - name: Create the iOS project
-        run: npx cap add ios
+        run: |
+          # the first pod install fails on iOS 13 (the update plugin needs a newer iOS); raise the target, cap sync reinstalls the pods
+          npx cap add ios || true
+          sed -i '' -E "s/platform :ios, '[0-9.]+'/platform :ios, '15.0'/" ios/App/Podfile
+          sed -i '' -E "s/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]+;/IPHONEOS_DEPLOYMENT_TARGET = 15.0;/g" ios/App/App.xcodeproj/project.pbxproj
+          grep -n "platform :ios" ios/App/Podfile
       - name: App icon, portrait only, no status bar
         run: |
           cp icon-1024.png ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png
